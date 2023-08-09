@@ -11,12 +11,11 @@ export const getWindType = (windSpeed) => {
     return 'Strong Breeze';
 };
 
-export const getCloudCoverageType = (cloudCover) => {
-    if (cloudCover = 0) return 'Clear/Sunny';
-    if (cloudCover < 1 / 8) return 'Clear/Sunny';
-    if (cloudCover < 3 / 8) return 'Mostly Clear';
-    if (cloudCover < 5 / 8) return 'Partly Cloudy';
-    if (cloudCover < 7 / 8) return 'Mostly Cloudy';
+export const getCloudCoverageType = (cloudCoverPercentage) => {
+    if (cloudCoverPercentage < 12.5) return 'Clear/Sunny';
+    if (cloudCoverPercentage < 37.5) return 'Mostly Clear';
+    if (cloudCoverPercentage < 62.5) return 'Partly Cloudy';
+    if (cloudCoverPercentage < 87.5) return 'Mostly Cloudy';
     return 'Cloudy';
 };
 
@@ -25,18 +24,18 @@ export const getWeatherIcon = (cloudCover, precipitation) => {
         return <i className="fas fa-sun text-yellow-500"></i>;
     } else if (cloudCover.includes('Clear') || cloudCover.includes('Partly Cloudy')) {
         if (precipitation === 'Slight') {
-            return <i className="fas fa-sun text-yellow-500"></i>; // Display sun when mostly clear with slight precipitation
+            return <i className="fas fa-cloud text-gray-600"></i>;
         } else {
-            return <i className="fas fa-cloud-showers-heavy text-gray-600"></i>; // Display heavy rain icon when not slight precipitation
+            return <i className="fas fa-cloud-showers-heavy text-gray-600"></i>;
         }
     } else if (cloudCover.includes('Cloudy')) {
         if (precipitation === 'Slight') {
-            return <i className="fas fa-cloud text-gray-600"></i>; // Display cloud icon when cloudy with slight precipitation
+            return <i className="fas fa-cloud text-gray-600"></i>;
         } else {
-            return <i className="fas fa-cloud-rain text-gray-600"></i>; // Display rain icon when not slight precipitation
+            return <i className="fas fa-cloud-rain text-gray-600"></i>;
         }
     } else {
-        return <i className="fas fa-question text-gray-600"></i>; // Display question mark icon for unknown conditions
+        return <i className="fas fa-question text-gray-600"></i>;
     }
 };
 

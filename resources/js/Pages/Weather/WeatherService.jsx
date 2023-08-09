@@ -15,14 +15,14 @@ export const weatherService = async (searchLocation) => {
         const response = await axios.get('https://api.opencagedata.com/geocode/v1/json', {
             params: {
                 q: searchLocation,
-                key: 'ba8d1a02a3104bcaaaf728051064acfd',
+                key: import.meta.env.VITE_OPENCAGE_API_KEY,
             },
         });
 
         const { lat, lng } = response.data.results[0].geometry;
 
         const params = 'waveHeight,airTemperature,windSpeed,precipitation,cloudCover';
-        const stormGlassApiKey = '09b6736a-35f6-11ee-8b7f-0242ac130002-09b673e2-35f6-11ee-8b7f-0242ac130002';
+        const stormGlassApiKey = import.meta.env.VITE_STORM_GLASS_API_KEY;
         const weatherResponse = await fetch(`https://api.stormglass.io/v2/weather/point?lat=${lat}&lng=${lng}&params=${params}`, {
             headers: {
                 'Authorization': stormGlassApiKey,
@@ -30,8 +30,6 @@ export const weatherService = async (searchLocation) => {
         });
 
         const weatherDataFromStormGlass = await weatherResponse.json();
-
-        console.log(weatherDataFromStormGlass);
 
         const formattedWeatherData = weatherDataFromStormGlass.hours.filter((hourData) => {
             return hourData.time.startsWith(today);
@@ -41,7 +39,7 @@ export const weatherService = async (searchLocation) => {
             airTemperature: hourData.airTemperature ? hourData.airTemperature.sg : null,
             precipitation: getPrecipitationType(hourData.precipitation ? hourData.precipitation.sg : null),
             windSpeed: getWindType(hourData.windSpeed ? hourData.windSpeed.sg : null),
-            cloudCover: getCloudCoverageType(hourData.cloudCover ? hourData.cloudCover.noaa : null),
+            cloudCover: getCloudCoverageType(hourData.cloudCover ? hourData.cloudCover.sg : null),
         }));
 
 
