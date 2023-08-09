@@ -21,3 +21,9 @@ Please ensure that you run `npm run dev` to start the application as the site is
 I have also commited all files from the repo including my docker setup, if you use docker you can simply run docker-compose up -d and it will create the containers for you.
 
 If you have any trouble with the docker setup get in touch and i can assist.
+
+What i'd have done next: 
+
+I'd ideally have liked to have implemented a cron job that runs once a day that sends an email to the user with a daily weather report of their favourite places but due to focusing on the react frontend side of the app i ran out of time. 
+
+If i was to implement this i'd loop over the users favourite locations and display these in an email with a high and low of the temperatures for the next week. 
