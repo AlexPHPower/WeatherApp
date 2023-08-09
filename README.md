@@ -15,3 +15,9 @@ I have created a test to ensure that the favourites are saved in the database so
 I didn't find much to do regarding the backend as everything i have attempted with react seems to have handled most of the work
 
 I have included a cache into the system so that repeated requests for the same area aren't made to the api and this will improve user experience at a larger scale.
+
+Please ensure that you run `npm run dev` to start the application as the site is served using react and will only show the default laravel documentation view otherwise.
+
+I have also commited all files from the repo including my docker setup, if you use docker you can simply run docker-compose up -d and it will create the containers for you.
+
+If you have any trouble with the docker setup get in touch and i can assist.
